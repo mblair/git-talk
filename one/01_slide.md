@@ -92,6 +92,9 @@
 	git cat-file -t [each previous sha]
 
 !SLIDE bullets incremental
+# Storage confusion #
+
+!SLIDE bullets incremental
 # Trees #
 
 * Contain blob metadata & subtrees.
