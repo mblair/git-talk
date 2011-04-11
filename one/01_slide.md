@@ -19,6 +19,11 @@
 * How many use **Git**?
 
 !SLIDE bullets incremental
+# Quick Git intro #
+
+* demo
+
+!SLIDE bullets incremental
 # Storage #
 
 * Similar to a UNIX filesystem
@@ -48,7 +53,7 @@
 !SLIDE bullets incremental
 # Ruby #
 
-* (cue demo)
+* demo
 
 !SLIDE
 # Git #
@@ -66,10 +71,12 @@
 
 	git cat-file blob [sha]
 
-!SLIDE bullets incremental
+!SLIDE bullets incremental small
 # Commits #
 
 * Contain **trees**, and their associated **blobs**
+* Contain references to their parent(s), if applicable
+* `git log --pretty=raw`
 * Can be referred to by **refs**
 * Popular ref: `HEAD`
 * Another: `master`
@@ -88,3 +95,48 @@
 # Trees #
 
 * Contain blob metadata & subtrees.
+
+!SLIDE code
+	@@@sh
+	rm -rf greeting .git
+	echo 'Hello LUGSB!' > greeting
+	git init	
+	git add greeting
+	git log # :-(
+	git ls-files --stage # :-)
+	cat .git/index
+	git write-tree
+	echo "initial" | git commit-tree [tree sha]
+	git update-ref refs/heads/master [commit sha]
+	git symbolic-ref HEAD refs/heads/master
+	git log
+
+!SLIDE bullets incremental
+# More refs #
+
+* (make two branches and merge them)
+* `git show-branch`
+
+!SLIDE bullets incremental small
+# Rebasing and its ramifications
+
+* (make two branches)
+* `git log --pretty=oneline --graph`
+* `git log -p`
+* (rebase)
+* `git log -p`
+
+!SLIDE bullets incremental
+# Stashing #
+
+* `git reflog`
+* `git stash`
+* `git stash apply`
+* `git stash list`
+* `git reflog`
+
+!SLIDE code
+# git-snapshot #
+	@@@sh
+	#!/bin/sh
+	git stash && git stash apply
