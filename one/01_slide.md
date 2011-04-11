@@ -23,17 +23,17 @@
 
 * Similar to a UNIX filesystem
 * Duh, because Linus wrote it.
-* Made up of trees that contain subtrees and leaves
+* Made up of commits that point to trees that contain blobs and possibly more trees
 
 !SLIDE
-# Units #
+# Objects #
 
 !SLIDE bullets incremental
 # Blobs #
 
 * Contain file contents
 * **Only** file contents
-* These are the leaves
+* These represent the leaves of the trees
 * Immutable
 
 !SLIDE bullets incremental
@@ -45,8 +45,10 @@
 !SLIDE
 # How does it store content? #
 
-!SLIDE
+!SLIDE bullets incremental
 # Ruby #
+
+* (cue demo)
 
 !SLIDE
 # Git #
@@ -65,8 +67,24 @@
 	git cat-file blob [sha]
 
 !SLIDE bullets incremental
+# Commits #
+
+* Contain **trees**, and their associated **blobs**
+* Can be referred to by **refs**
+* Popular ref: `HEAD`
+* Another: `master`
+
+!SLIDE code
+	@@@sh
+	git rev-parse HEAD
+	git cat-file -t HEAD
+	git cat-file commit HEAD
+	git ls-tree HEAD
+	git ls-tree [tree sha from cat-file commit]
+	find .git/objects -type f | sort
+	git cat-file -t [each previous sha]
+
+!SLIDE bullets incremental
 # Trees #
 
 * Contain blob metadata & subtrees.
-
-
